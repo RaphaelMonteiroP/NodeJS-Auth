@@ -15,8 +15,7 @@
   "type": "module",
   "main": "./dist/server.js",
   "scripts": {
-    "dev": "nodemon /dist/server.js",
-    "postinstall": "prisma skills sync || exit 0"
+    "dev": "nodemon /dist/server.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
