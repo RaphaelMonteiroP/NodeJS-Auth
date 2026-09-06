@@ -1,19 +1,9 @@
 import express from "express";
+import router from "./routes.js";
 
 const app = express();
 
 app.set("view engine", "ejs");
-
-app.get("/", (req, res) => {
-  res.render("main.ejs");
-});
-
-app.get("/register", (req, res) => {
-  res.render("register.ejs");
-});
-
-app.get("/login", (req, res) => {
-  res.render("login.ejs");
-});
-
+app.use(express.json());
+app.use(router);
 app.listen(4000);
