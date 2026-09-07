@@ -15,4 +15,10 @@ router.get("/register", (req, res) => {
 
 router.post("/register", (req, res) => authController.userRegister(req, res));
 
+router.get("/login", (req, res) => {
+  res.render("login.ejs");
+});
+
+router.post("/login", (req, res) => authController.userLogin(req, res));
+
 export default router;

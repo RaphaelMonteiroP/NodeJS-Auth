@@ -26,4 +26,20 @@ export default class AuthController {
         .json({ message: "Error registering user", error: error.message });
     }
   }
+  async userLogin(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return res
+          .status(400)
+          .json({ message: "Must contain email and password" });
+      }
+      const userLogin = await authService.userLogin(email, password);
+      return res
+        .status(200)
+        .json({ message: "User Logged In", user: userLogin.name });
+    } catch (error: any) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
 }
