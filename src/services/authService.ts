@@ -1,5 +1,5 @@
 import AuthRepository from "../repositories/authRepository.js";
-import { hashPassword } from "../helpers/hashHelper.js";
+import { hashPassword, compareHashedPassword } from "../helpers/hashHelper.js";
 
 const authRepository = new AuthRepository();
 
@@ -16,5 +16,17 @@ export default class AuthService {
       hashedPassword,
     );
     return userCreated;
+  }
+
+  async userLogin(email: string, password: string) {
+    const userSearch = await authRepository.userFind(email);
+    if (!userSearch) {
+      throw new Error("Incorrect email or password");
+    }
+    const compare = await compareHashedPassword(password, userSearch.password);
+    if (!compare) {
+      throw new Error("Incorrect email or password");
+    }
+    return userSearch;
   }
 }
